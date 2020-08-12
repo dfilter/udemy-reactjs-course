@@ -13,9 +13,9 @@ class App extends Component {
       <div className="App">
         <h1>Hello from react app!</h1>
         <p>It's working!</p>
-        <Person />
-        <Person />
-        <Person />
+        <Person name="John" age="28" />
+        <Person name="Jane" age="29">My Hobbies: Racing</Person>
+        <Person name="Jake" age="26" />
       </div>
     );
     // below can be used to render a component but since none is defined we can use div instead

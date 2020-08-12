@@ -2,9 +2,10 @@
 import React from 'react'
 
 // in its purest form a component is simply a function that returns jsx
-const person = () => {
+// props will contain all the properties/attributes that are passed to this component
+const person = (props) => {
   // to execute javascript inline the javascript must be wrapped in "{}"
-  return <p>I'm a person, and am {Math.floor(Math.random() * 30)}</p>
+  return <p>I'm {props.name}, and am {props.age} years old.</p>
 }
 
 export default person
