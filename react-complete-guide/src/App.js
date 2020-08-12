@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+// components imported must have uppercase
+import Person from './Person/Person'
 
 class App extends Component {
   /**
@@ -10,7 +12,8 @@ class App extends Component {
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
-        <p>Its working!</p>
+        <p>It's working!</p>
+        <Person />
       </div>
     );
     // below can be used to render a component but since none is defined we can use div instead
