@@ -15,13 +15,18 @@ class App extends Component {
     ]
   }
   
+  switchNameHandler = () => {
+    console.log('Was clicked!')
+  }
+
   render() {
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
         <p>It's working!</p>
-        <button>Switch Name</button>
+        {/* note that the parentheses are not used for switchNameHandler this stops the function being called as soon as it is rendered */}
+        <button onClick={this.switchNameHandler}>Switch Name</button>
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age} />
         <Person name={this.state.persons[2].name} age={this.state.persons[2].age}>My Hobbies: Racing</Person>
