@@ -7,8 +7,10 @@ class App extends Component {
    */
   render() {
     return (
+      // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
+        <p>Its working!</p>
       </div>
     );
     // below can be used to render a component but since none is defined we can use div instead
