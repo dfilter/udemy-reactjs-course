@@ -40,13 +40,21 @@ class App extends Component {
   }
 
   render() {
+    // inline styles below these will be scoped to this component
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    }
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
         <p>It's working!</p>
         {/* another way to call a function is to wrap it in another function, this one is not recommended however */}
-        <button onClick={() => this.switchNameHandler('John Doe!')}>Switch Name</button>
+        <button style={style} onClick={() => this.switchNameHandler('John Doe!')}>Switch Name</button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age} />
