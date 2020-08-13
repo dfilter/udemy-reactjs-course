@@ -44,7 +44,8 @@ class App extends Component {
   render() {
     // inline styles below these will be scoped to this component
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -70,6 +71,7 @@ class App extends Component {
           })}
         </div>
       )
+      style.backgroundColor = 'red'
     }
 
     return (
