@@ -19,19 +19,20 @@ class App extends Component {
 
   deletePersonHandler = (personIndex) => {
     // this approach is flawed since in js objects are reference types using spread to copy fixes this
-    const persons = [ ...this.state.persons ]
+    const persons = [...this.state.persons]
     persons.splice(personIndex, 1)  // Since persons as a reference to state splicing it will modify state. This is bad practice
     this.setState({ persons: persons })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: 'John', age: 28 },
-        { name: event.target.value, age: 29 },
-        { name: 'Jake', age: 26 }
-      ]
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex((p) => {
+      return p.id === id
     })
+    const person = { ...this.state.persons[personIndex] }
+    person.name = event.target.value
+    const persons = [...this.state.persons]
+    persons[personIndex] = person
+    this.setState({ persons })
   }
 
   togglePersonsHandler = () => {
@@ -60,7 +61,12 @@ class App extends Component {
           {this.state.persons.map((person, index) => {
             // key property is a default property that allows jsx to know what was changed in the virtual DOM
             // It is best to provide key with a value that will be unique throughout the app
-            return <Person key={person.id} name={person.name} age={person.age} click={() => this.deletePersonHandler(index)} />
+            return <Person
+              key={person.id}
+              name={person.name}
+              age={person.age}
+              click={() => this.deletePersonHandler(index)}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       )
