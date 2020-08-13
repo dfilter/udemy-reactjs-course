@@ -18,8 +18,9 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    const persons = this.state.persons
-    persons.splice(personIndex, 1)
+    // this approach is flawed since in js objects are reference types using spread to copy fixes this
+    const persons = [ ...this.state.persons ]
+    persons.splice(personIndex, 1)  // Since persons as a reference to state splicing it will modify state. This is bad practice
     this.setState({ persons: persons })
   }
 
