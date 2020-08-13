@@ -62,18 +62,10 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age} />
-          {/* to call a function with arguments the .bind() method is used passing this and the arguments to be passed. */}
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameHandler.bind(this, 'John Doe')}
-            changed={this.nameChangedHandler} />
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}>My Hobbies: Racing</Person>
+          {/* map executes a method on every given element in an array used here to create a Person component for each person in array */}
+          {this.state.persons.map(person => {
+            return <Person name={person.name} age={person.age} />
+          })}
         </div>
       )
     }
