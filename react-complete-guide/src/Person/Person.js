@@ -11,6 +11,7 @@ const person = (props) => {
       <p onClick={props.click}>I'm {props.name}, and am {props.age} years old.</p>
       {/* props.children is reserved to anything passed between component tags */}
       <p>{props.children}</p>
+      <input type="text" onChange={props.changed} value={props.name}></input>
     </div>
   )
 }

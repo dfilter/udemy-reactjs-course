@@ -29,6 +29,16 @@ class App extends Component {
     })
   }
 
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        { name: 'John', age: 28 },
+        { name: event.target.value, age: 29 },
+        { name: 'Jake', age: 26 }
+      ]
+    })
+  }
+
   render() {
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
@@ -44,7 +54,8 @@ class App extends Component {
         <Person 
           name={this.state.persons[1].name} 
           age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'John Doe')} />
+          click={this.switchNameHandler.bind(this, 'John Doe')}
+          changed={this.nameChangedHandler} />
         <Person 
           name={this.state.persons[2].name} 
           age={this.state.persons[2].age}>My Hobbies: Racing</Person>
