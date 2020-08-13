@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Radium from 'radium'
+
 import './App.css';
 // components imported must have uppercase
 import Person from './Person/Person'
@@ -49,7 +51,12 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      // Below we are using radium to handle styling for hover
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let persons = null;
@@ -72,6 +79,11 @@ class App extends Component {
         </div>
       )
       style.backgroundColor = 'red'
+      // again changing the property with radium
+      style[':hover'] = {
+        backgroundColor: 'salmon',
+        color: 'black'
+      }
     }
 
     // setting css classes dynamically
@@ -101,4 +113,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);

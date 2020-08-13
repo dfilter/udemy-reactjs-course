@@ -1,5 +1,7 @@
 // despite not invoking the React class directly we still need to import it for the component below to work
 import React from 'react'
+import Radium from 'radium'
+
 import './Person.css'
 
 // in its purest form a component is simply a function that returns jsx
@@ -17,4 +19,4 @@ const person = (props) => {
   )
 }
 
-export default person
+export default Radium(person)
