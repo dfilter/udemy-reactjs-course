@@ -8,7 +8,7 @@ const person = (props) => {
   // to execute javascript inline the javascript must be wrapped in "{}"
   return (
     <div>
-      <p>I'm {props.name}, and am {props.age} years old.</p>
+      <p onClick={props.click}>I'm {props.name}, and am {props.age} years old.</p>
       {/* props.children is reserved to anything passed between component tags */}
       <p>{props.children}</p>
     </div>
