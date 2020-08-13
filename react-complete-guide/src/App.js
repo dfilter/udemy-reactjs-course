@@ -55,29 +55,37 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+
+    let persons = null;
+
+    // conditionally render content with an "if" statement
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age} />
+          {/* to call a function with arguments the .bind() method is used passing this and the arguments to be passed. */}
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler.bind(this, 'John Doe')}
+            changed={this.nameChangedHandler} />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}>My Hobbies: Racing</Person>
+        </div>
+      )
+    }
+
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
         <p>It's working!</p>
         <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {/* to conditionally render data we use a turnery statement and return null if the statement is not true */}
-        { this.state.showPersons ?
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age} />
-            {/* to call a function with arguments the .bind() method is used passing this and the arguments to be passed. */}
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameHandler.bind(this, 'John Doe')}
-              changed={this.nameChangedHandler} />
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}>My Hobbies: Racing</Person>
-          </div> : null
-        }
+        {/* We can render the person variable defined above here as follows: */}
+        {persons}
       </div>
     );
     // below can be used to render a component but since none is defined we can use div instead
