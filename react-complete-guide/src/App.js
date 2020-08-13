@@ -3,6 +3,7 @@ import './App.css';
 // components imported must have uppercase
 import Person from './Person/Person'
 
+// App is considered a stateful component because it uses the useState hook
 const app = (props) => {
   // useState() returns an array first element will always be the current state second will be a function to update the state
   const [ personsState, setPersonsState ] = useState({
