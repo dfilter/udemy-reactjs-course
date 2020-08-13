@@ -9,9 +9,9 @@ class App extends Component {
    */
   state = {
     persons: [
-      { name: 'John', age: 28 },
-      { name: 'Jane', age: 29 },
-      { name: 'Jake', age: 26 }
+      { id: 'ijwifghsf', name: 'John', age: 28 },
+      { id: '23jhklehr', name: 'Jane', age: 29 },
+      { id: 'l43khj5tr', name: 'Jake', age: 26 }
     ],
     otherState: 'hello world!',
     showPersons: false
@@ -58,7 +58,9 @@ class App extends Component {
         <div>
           {/* map executes a method on every given element in an array used here to create a Person component for each person in array */}
           {this.state.persons.map((person, index) => {
-            return <Person name={person.name} age={person.age} click={() => this.deletePersonHandler(index)} />
+            // key property is a default property that allows jsx to know what was changed in the virtual DOM
+            // It is best to provide key with a value that will be unique throughout the app
+            return <Person key={person.id} name={person.name} age={person.age} click={() => this.deletePersonHandler(index)} />
           })}
         </div>
       )
