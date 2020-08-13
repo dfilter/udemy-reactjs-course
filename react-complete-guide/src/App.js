@@ -13,7 +13,8 @@ class App extends Component {
       { name: 'Jane', age: 29 },
       { name: 'Jake', age: 26 }
     ],
-    otherState: 'hello world!'
+    otherState: 'hello world!',
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -39,6 +40,12 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
+    })
+  }
+
   render() {
     // inline styles below these will be scoped to this component
     const style = {
@@ -53,20 +60,24 @@ class App extends Component {
       <div className="App">
         <h1>Hello from react app!</h1>
         <p>It's working!</p>
-        {/* another way to call a function is to wrap it in another function, this one is not recommended however */}
-        <button style={style} onClick={() => this.switchNameHandler('John Doe!')}>Switch Name</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        {/* to call a function with arguments the .bind() method is used passing this and the arguments to be passed. */}
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, 'John Doe')}
-          changed={this.nameChangedHandler} />
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}>My Hobbies: Racing</Person>
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        {/* to conditionally render data we use a turnery statement and return null if the statement is not true */}
+        { this.state.showPersons ?
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age} />
+            {/* to call a function with arguments the .bind() method is used passing this and the arguments to be passed. */}
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, 'John Doe')}
+              changed={this.nameChangedHandler} />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}>My Hobbies: Racing</Person>
+          </div> : null
+        }
       </div>
     );
     // below can be used to render a component but since none is defined we can use div instead
