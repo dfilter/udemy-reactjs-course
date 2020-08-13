@@ -12,11 +12,21 @@ class App extends Component {
       { name: 'John', age: 28 },
       { name: 'Jane', age: 29 },
       { name: 'Jake', age: 26 }
-    ]
+    ],
+    otherState: 'hello world!'
   }
-  
+
   switchNameHandler = () => {
-    console.log('Was clicked!')
+    // console.log('Was clicked!')
+    // this.state.persons[0].name = 'John Doe'  // don't do this!
+    // setState is a method provided by the Component class extension
+    this.setState({
+      persons: [
+        { name: 'John Doe', age: 28 },
+        { name: 'Jane', age: 29 },
+        { name: 'Jake', age: 26 }
+      ]
+    })
   }
 
   render() {
