@@ -17,17 +17,10 @@ class App extends Component {
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
-    // console.log('Was clicked!')
-    // this.state.persons[0].name = 'John Doe'  // don't do this!
-    // setState is a method provided by the Component class extension
-    this.setState({
-      persons: [
-        { name: newName, age: 28 },
-        { name: 'Jane', age: 29 },
-        { name: 'Jake', age: 26 }
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    const persons = this.state.persons
+    persons.splice(personIndex, 1)
+    this.setState({ persons: persons })
   }
 
   nameChangedHandler = (event) => {
@@ -63,8 +56,8 @@ class App extends Component {
       persons = (
         <div>
           {/* map executes a method on every given element in an array used here to create a Person component for each person in array */}
-          {this.state.persons.map(person => {
-            return <Person name={person.name} age={person.age} />
+          {this.state.persons.map((person, index) => {
+            return <Person name={person.name} age={person.age} click={() => this.deletePersonHandler(index)} />
           })}
         </div>
       )
