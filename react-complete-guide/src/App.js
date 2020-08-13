@@ -74,11 +74,21 @@ class App extends Component {
       style.backgroundColor = 'red'
     }
 
+    // setting css classes dynamically
+    const classes = []
+    if (this.state.persons.length <= 2) {
+      classes.push('red')
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold')
+    }
+
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className="App">
         <h1>Hello from react app!</h1>
-        <p>It's working!</p>
+        {/* applying classes below */}
+        <p className={classes.join(' ')}>It's working!</p>
         <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {/* We can render the person variable defined above here as follows: */}
         {persons}
