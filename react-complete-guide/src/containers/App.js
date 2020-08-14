@@ -34,6 +34,15 @@ class App extends Component {
     console.log('[App.js] componentDidMount')
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate', nextProps, nextState)
+    return true
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate')
+  }
+
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons]
     persons.splice(personIndex, 1)
@@ -72,8 +81,8 @@ class App extends Component {
       <div className={classes.App}>
         <Cockpit
           title={this.props.appTitle}
-          showPersons={this.state.showPersons} 
-          personsLength={this.state.persons.length} 
+          showPersons={this.state.showPersons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonsHandler} />
         {persons}
       </div>
