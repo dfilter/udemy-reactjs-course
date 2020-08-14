@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'
 
 import './App.css';
 // components imported must have uppercase
 import Person from './Person/Person'
-
-// note that for :hover there needs to be an "&" for styled to pick it up.
-// we can use es6 string templating to use the showPersons value passed to the props of this component to conditionally change the styling
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  color: white;
-  font: inherit;
-  border: 1px solid blue;
-  padding: 8px;
-  cursor: pointer;
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-  }
-`
 
 class App extends Component {
   /**
@@ -96,7 +80,7 @@ class App extends Component {
         {/* applying classes below */}
         <p className={classes.join(' ')}>It's working!</p>
         {/* passing this.state.showPersons in order to change styles dynamically */}
-        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+        <button className="button" onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {/* We can render the person variable defined above here as follows: */}
         {persons}
       </div>
