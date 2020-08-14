@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
+import styled from 'styled-components'
 
 import './App.css';
 // components imported must have uppercase
 import Person from './Person/Person'
+
+// note that for :hover there needs to be an "&" for styled to pick it up.
+const StyledButton = styled.button`
+  background-color: green;
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: lightgreen;
+    color: black;
+  }
+`
 
 class App extends Component {
   /**
@@ -43,21 +58,7 @@ class App extends Component {
   }
 
   render() {
-    // inline styles below these will be scoped to this component
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      // Below we are using radium to handle styling for hover
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    }
-
+    const style = {}
     let persons = null;
 
     // conditionally render content with an "if" statement
@@ -100,7 +101,7 @@ class App extends Component {
         <h1>Hello from react app!</h1>
         {/* applying classes below */}
         <p className={classes.join(' ')}>It's working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <StyledButton onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
         {/* We can render the person variable defined above here as follows: */}
         {persons}
       </div>
