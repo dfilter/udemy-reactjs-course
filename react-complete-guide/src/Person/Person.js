@@ -8,9 +8,14 @@ import './Person.css'
 // props will contain all the properties/attributes that are passed to this component
 // person is considered a stateless component since it has no state useState hooks
 const person = (props) => {
+  const style = {
+    '@media (min-width: 500px)': {
+      width: '450px'
+    }
+  }
   // to execute javascript inline the javascript must be wrapped in "{}"
   return (
-    <div className="Person">
+    <div className="Person" style={style}>
       <p onClick={props.click}>I'm {props.name}, and am {props.age} years old.</p>
       {/* props.children is reserved to anything passed between component tags */}
       <p>{props.children}</p>
