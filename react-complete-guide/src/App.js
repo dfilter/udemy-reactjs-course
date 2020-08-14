@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './App.css';
+import classes from './App.css'
 // components imported must have uppercase
 import Person from './Person/Person'
 
@@ -43,7 +43,8 @@ class App extends Component {
   }
 
   render() {
-    let persons = null;
+    let persons = null
+    let btnClass = ''
 
     // conditionally render content with an "if" statement
     if (this.state.showPersons) {
@@ -62,29 +63,30 @@ class App extends Component {
           })}
         </div>
       )
+      btnClass = classes.Red
     }
 
     // setting css classes dynamically
-    const classes = []
+    const assignedClasses = []
     if (this.state.persons.length <= 2) {
-      classes.push('red')
+      assignedClasses.push(classes.red)
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold')
+      assignedClasses.push(classes.bold)
     }
 
     return (
       // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hello from react app!</h1>
         {/* applying classes below */}
-        <p className={classes.join(' ')}>It's working!</p>
+        <p className={assignedClasses.join(' ')}>It's working!</p>
         {/* passing this.state.showPersons in order to change styles dynamically */}
-        <button className="button" onClick={this.togglePersonsHandler}>Toggle Persons</button>
+        <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {/* We can render the person variable defined above here as follows: */}
         {persons}
       </div>
-    );
+    )
     // below can be used to render a component but since none is defined we can use div instead
     // second argument is config, all fallowing arguments are nested each one being nested inside
     // ultimately the code above will look like the code below
@@ -92,4 +94,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
