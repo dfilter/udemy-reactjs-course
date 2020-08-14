@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 
 import classes from './App.css'
-// components imported must have uppercase
 import Person from './Person/Person'
 
 class App extends Component {
-  /**
-   * App is the root component which all other components will be nested inside of
-   */
   state = {
     persons: [
       { id: 'ijwifghsf', name: 'John', age: 28 },
@@ -19,9 +15,8 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    // this approach is flawed since in js objects are reference types using spread to copy fixes this
     const persons = [...this.state.persons]
-    persons.splice(personIndex, 1)  // Since persons as a reference to state splicing it will modify state. This is bad practice
+    persons.splice(personIndex, 1)
     this.setState({ persons: persons })
   }
 
@@ -46,14 +41,10 @@ class App extends Component {
     let persons = null
     let btnClass = ''
 
-    // conditionally render content with an "if" statement
     if (this.state.showPersons) {
       persons = (
         <div>
-          {/* map executes a method on every given element in an array used here to create a Person component for each person in array */}
           {this.state.persons.map((person, index) => {
-            // key property is a default property that allows jsx to know what was changed in the virtual DOM
-            // It is best to provide key with a value that will be unique throughout the app
             return <Person
               key={person.id}
               name={person.name}
@@ -66,7 +57,6 @@ class App extends Component {
       btnClass = classes.Red
     }
 
-    // setting css classes dynamically
     const assignedClasses = []
     if (this.state.persons.length <= 2) {
       assignedClasses.push(classes.red)
@@ -76,21 +66,13 @@ class App extends Component {
     }
 
     return (
-      // since "class" is a reserved name in javascript react cannot use class as an attribute name for styling classes
       <div className={classes.App}>
         <h1>Hello from react app!</h1>
-        {/* applying classes below */}
         <p className={assignedClasses.join(' ')}>It's working!</p>
-        {/* passing this.state.showPersons in order to change styles dynamically */}
         <button className={btnClass} onClick={this.togglePersonsHandler}>Toggle Persons</button>
-        {/* We can render the person variable defined above here as follows: */}
         {persons}
       </div>
     )
-    // below can be used to render a component but since none is defined we can use div instead
-    // second argument is config, all fallowing arguments are nested each one being nested inside
-    // ultimately the code above will look like the code below
-    // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Hello from react app!'))
   }
 }
 
