@@ -6,15 +6,16 @@ import './App.css';
 import Person from './Person/Person'
 
 // note that for :hover there needs to be an "&" for styled to pick it up.
+// we can use es6 string templating to use the showPersons value passed to the props of this component to conditionally change the styling
 const StyledButton = styled.button`
-  background-color: green;
+  background-color: ${props => props.alt ? 'red' : 'green'};
   color: white;
   font: inherit;
   border: 1px solid blue;
   padding: 8px;
   cursor: pointer;
   &:hover {
-    background-color: lightgreen;
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
     color: black;
   }
 `
@@ -58,7 +59,6 @@ class App extends Component {
   }
 
   render() {
-    const style = {}
     let persons = null;
 
     // conditionally render content with an "if" statement
@@ -78,12 +78,6 @@ class App extends Component {
           })}
         </div>
       )
-      style.backgroundColor = 'red'
-      // again changing the property with radium
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     // setting css classes dynamically
@@ -101,7 +95,8 @@ class App extends Component {
         <h1>Hello from react app!</h1>
         {/* applying classes below */}
         <p className={classes.join(' ')}>It's working!</p>
-        <StyledButton onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
+        {/* passing this.state.showPersons in order to change styles dynamically */}
+        <StyledButton alt={this.state.showPersons} onClick={this.togglePersonsHandler}>Toggle Persons</StyledButton>
         {/* We can render the person variable defined above here as follows: */}
         {persons}
       </div>
