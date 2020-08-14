@@ -5,7 +5,10 @@ import classes from './Cockpit.css'
 const cockpit = (props) => {
   useEffect(() => {
     console.log('[Cockpit.js] useEffect')
-  })
+    setTimeout(() => {
+      alert('Saved data to cloud!')
+    }, 1000)
+  }, [props.personsLength])
 
   let btnClass = ''
   if (props.showPerson) {
