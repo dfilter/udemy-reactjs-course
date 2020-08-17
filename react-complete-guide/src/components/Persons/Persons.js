@@ -5,6 +5,10 @@ import Person from './Person/Person'
 /**
  * PureComponent will check all passed props for changes in order to determine if the component should re-render.
  * This is similar to shouldComponentUpdate below that has been commented out.
+ * 
+ * 112. Understanding Prop Chain Problems
+ * Here Persons does not care about user authentication but we must pass this prop down so that it
+ * can be used by the Person component.
  */
 class Persons extends PureComponent {
   // initial state is undefined therefor redundant
@@ -41,8 +45,7 @@ class Persons extends PureComponent {
         name={person.name}
         age={person.age}
         click={() => this.props.clicked(index)}
-        changed={(event) => this.props.changed(event, person.id)} 
-        isAuth={this.props.isAuthenticated}/>
+        changed={(event) => this.props.changed(event, person.id)} />
     })
   }
 

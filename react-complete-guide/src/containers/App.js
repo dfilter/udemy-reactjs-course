@@ -5,6 +5,7 @@ import Cockpit from '../components/Cockpit/Cockpit'
 import Persons from '../components/Persons/Persons'
 import withClass from '../hoc/withClass'
 import Auxillary from '../hoc/Auxiliary'
+import AuthContext from '../context/auth-context'
 
 /**
  * To use the higher order component defined in withClass we wrap the App export at the end of the file
@@ -13,7 +14,10 @@ import Auxillary from '../hoc/Auxiliary'
  * When updating state note that the state accessed may not be the latest or the state you may expect 
  * since react is in charge of when it thinks is a good time to update state. To avoid this we can pass
  * an anonymous function "() =>" to setState passing it prevState, and props. In this way we are guaranteed
- * to get the state we expect. 
+ * to get the state we expect.
+ *  
+ * 113. Using the Context API
+ * Every component that needs access to AuthContext will be wrapped with <AuthContext.Provider>
  */
 class App extends Component {
   constructor(props) {
@@ -104,15 +108,20 @@ class App extends Component {
     return (
       <Auxillary classes={classes.App}>
         <button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Toggle Cockpit</button>
-        {this.state.showCockpit ?
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-            login={this.loginHandler} />
-          : null}
-        {persons}
+        <AuthContext.Provider 
+          value={{ 
+            authenticated: this.state.authenticated, 
+            login: this.loginHandler 
+          }}>
+          {this.state.showCockpit ?
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler} />
+            : null}
+          {persons}
+        </AuthContext.Provider>
       </Auxillary>
     )
   }

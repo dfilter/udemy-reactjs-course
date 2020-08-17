@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Auxillary from '../../../hoc/Auxiliary'
 import withClass from '../../../hoc/withClass'
 import classes from './Person.css'
+import AuthContext from '../../../context/auth-context'
 
 /**
  * Since in jsx render can only return one expression we have some choices:
@@ -22,6 +23,10 @@ import classes from './Person.css'
  * 110. Using Refs:
  * If we need to reference a jsx element we can use the ref property. This can be used to select it and execute
  * javascript code on that element. Here we give the element focus
+ * 
+ * 113. Using the Context API
+ * <AuthContext.Consumer> must wrap a function which returns the content we want. This function will 
+ * be passed the context.
  */
 class Person extends Component {
   constructor(props) {
@@ -38,7 +43,9 @@ class Person extends Component {
     console.log('[Person.js] rendering...')
 
     return <Auxillary>
-      {this.props.isAuth ? <p>Authenticated</p> : <p>Please Login</p>}
+      <AuthContext.Consumer>
+        {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>}
+      </AuthContext.Consumer>
       <p key="i1" onClick={this.props.click}>I'm {this.props.name}, and am {this.props.age} years old.</p>
       <p key="i2" >{this.props.children}</p>
       <input
@@ -48,7 +55,7 @@ class Person extends Component {
         type="text"
         onChange={this.props.changed}
         value={this.props.name} />
-    </Auxillary>
+    </Auxillary >
   }
 }
 
