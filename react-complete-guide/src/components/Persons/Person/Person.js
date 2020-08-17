@@ -27,6 +27,11 @@ import AuthContext from '../../../context/auth-context'
  * 113. Using the Context API
  * <AuthContext.Consumer> must wrap a function which returns the content we want. This function will 
  * be passed the context.
+ * 
+ * 114. contextType & useContext()
+ * static contextType allows react to access the context within the class itself. Before it could only 
+ * be accessed on render. Adding it will expose this.context to the class body allowing it to be used 
+ * programmatically.
  */
 class Person extends Component {
   constructor(props) {
@@ -34,18 +39,19 @@ class Person extends Component {
     this.inputElementRef = React.createRef()
   }
 
+  static contextType = AuthContext
+
   componentDidMount() {
     // this.inputElement.focus()
     this.inputElementRef.current.focus()
+    console.log(this.context.authenticated)
   }
 
   render() {
     console.log('[Person.js] rendering...')
 
     return <Auxillary>
-      <AuthContext.Consumer>
-        {(context) => context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>}
-      </AuthContext.Consumer>
+      {this.context.authenticated ? <p>Authenticated</p> : <p>Please Login</p>}
       <p key="i1" onClick={this.props.click}>I'm {this.props.name}, and am {this.props.age} years old.</p>
       <p key="i2" >{this.props.children}</p>
       <input
