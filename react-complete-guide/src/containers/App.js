@@ -3,8 +3,13 @@ import React, { Component } from 'react'
 import classes from './App.css'
 import Cockpit from '../components/Cockpit/Cockpit'
 import Persons from '../components/Persons/Persons'
-import WithClass from '../hoc/WithClass'
+import withClass from '../hoc/withClass'
+import Auxillary from '../hoc/Auxiliary'
 
+/**
+ * To use the higher order component defined in withClass we wrap the App export at the end of the file
+ * with it, passing any props we need for withClass (in this case the app class).
+ */
 class App extends Component {
   constructor(props) {
     super(props)
@@ -80,7 +85,7 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Auxillary classes={classes.App}>
         <button onClick={() => this.setState({ showCockpit: !this.state.showCockpit })}>Toggle Cockpit</button>
         {this.state.showCockpit ?
           <Cockpit
@@ -90,9 +95,9 @@ class App extends Component {
             clicked={this.togglePersonsHandler} />
           : null}
         {persons}
-      </WithClass>
+      </Auxillary>
     )
   }
 }
 
-export default App
+export default withClass(App, classes.App)
