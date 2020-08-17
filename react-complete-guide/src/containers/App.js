@@ -31,6 +31,7 @@ class App extends Component {
     otherState: 'hello world!',
     showPersons: false,
     changedCounter: 0,
+    authenticated: false,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -70,11 +71,11 @@ class App extends Component {
     person.name = event.target.value
     const persons = [...this.state.persons]
     persons[personIndex] = person
-    this.setState((prevState, props) => { 
-      return { 
-        persons, 
-        changedCounter: prevState.changedCounter + 1 
-      } 
+    this.setState((prevState, props) => {
+      return {
+        persons,
+        changedCounter: prevState.changedCounter + 1
+      }
     })
   }
 
@@ -82,6 +83,10 @@ class App extends Component {
     this.setState({
       showPersons: !this.state.showPersons
     })
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticated: true })
   }
 
   render() {
@@ -92,7 +97,8 @@ class App extends Component {
       persons = <Persons
         persons={this.state.persons}
         clicked={this.deletePersonHandler}
-        changed={this.nameChangedHandler} />
+        changed={this.nameChangedHandler}
+        isAuthenticated={this.state.authenticated} />
     }
 
     return (
@@ -103,7 +109,8 @@ class App extends Component {
             title={this.props.appTitle}
             showPersons={this.state.showPersons}
             personsLength={this.state.persons.length}
-            clicked={this.togglePersonsHandler} />
+            clicked={this.togglePersonsHandler}
+            login={this.loginHandler} />
           : null}
         {persons}
       </Auxillary>
