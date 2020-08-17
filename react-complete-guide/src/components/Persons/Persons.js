@@ -1,8 +1,12 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 
 import Person from './Person/Person'
 
-class Persons extends Component {
+/**
+ * PureComponent will check all passed props for changes in order to determine if the component should re-render.
+ * This is similar to shouldComponentUpdate below that has been commented out.
+ */
+class Persons extends PureComponent {
   // initial state is undefined therefor redundant
   // static getDerivedStateFromProps(props, state) {
   //   console.log('[Persons.js] getDerivedStateFromProps', props, state)
@@ -14,10 +18,14 @@ class Persons extends Component {
   //   console.log('[Persons.js] componentWillReceiveProps', props)
   // }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('[Persons.js] shouldComponentUpdate', nextProps, nextState)
-    return nextProps.persons !== this.props.persons
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log('[Persons.js] shouldComponentUpdate', nextProps, nextState)
+  //   return (
+  //     nextProps.persons !== this.props.persons || 
+  //     nextProps.changed !== this.props.changed || 
+  //     nextProps.clicked !== this.props.clicked
+  //   )
+  // }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log('[Persons.js] getSnapshotBeforeUpdate', prevProps, prevState)
