@@ -9,6 +9,11 @@ import Auxillary from '../hoc/Auxiliary'
 /**
  * To use the higher order component defined in withClass we wrap the App export at the end of the file
  * with it, passing any props we need for withClass (in this case the app class).
+ * 
+ * When updating state note that the state accessed may not be the latest or the state you may expect 
+ * since react is in charge of when it thinks is a good time to update state. To avoid this we can pass
+ * an anonymous function "() =>" to setState passing it prevState, and props. In this way we are guaranteed
+ * to get the state we expect. 
  */
 class App extends Component {
   constructor(props) {
@@ -24,7 +29,8 @@ class App extends Component {
       { id: 'l43khj5tr', name: 'Jake', age: 26 }
     ],
     otherState: 'hello world!',
-    showPersons: false
+    showPersons: false,
+    changedCounter: 0,
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -64,7 +70,12 @@ class App extends Component {
     person.name = event.target.value
     const persons = [...this.state.persons]
     persons[personIndex] = person
-    this.setState({ persons })
+    this.setState((prevState, props) => { 
+      return { 
+        persons, 
+        changedCounter: prevState.changedCounter + 1 
+      } 
+    })
   }
 
   togglePersonsHandler = () => {
