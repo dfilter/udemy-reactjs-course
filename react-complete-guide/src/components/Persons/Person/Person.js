@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 
 import Auxillary from '../../../hoc/Auxiliary'
-// import classes from './Person.css'
+import withClass from  '../../../hoc/withClass'
+import classes from './Person.css'
 
 /**
  * Since in jsx render can only return one expression we have some choices:
@@ -24,4 +25,4 @@ class Person extends Component {
   }
 }
 
-export default Person
+export default withClass(Person, classes.Person)
