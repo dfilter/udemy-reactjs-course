@@ -1,25 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 import classes from './Cockpit.css'
 
+/**
+ * 111. Refs with React Hooks
+ * If we wanted to click the toggle button when the page loads for the first time 
+ * we can utilize the useRef hook. We pass that hook to the ref prop of the button
+ * and run the click method on it within the useEffect hook
+ */
 const cockpit = (props) => {
+  const toggleButtonRef = useRef(null)
+
   useEffect(() => {
     console.log('[Cockpit.js] useEffect')
-    const timer = setTimeout(() => {
-      alert('Saved data to cloud!')
-    }, 1000)
+    toggleButtonRef.current.click()
     return () => {
-      clearTimeout(timer)
       console.log('[Cockpit.js] cleanup useEffect')
     }
   }, [])
-  
-  useEffect(() => {
-    console.log('[Cockpit.js] 2nd useEffect')
-    return () => {
-      console.log('[Cockpit.js] 2nd cleanup useEffect')
-    }
-  })
 
   let btnClass = ''
   if (props.showPerson) {
@@ -38,7 +36,7 @@ const cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>It's working!</p>
-      <button className={btnClass} onClick={props.clicked}>Toggle Persons</button>
+      <button ref={toggleButtonRef} className={btnClass} onClick={props.clicked}>Toggle Persons</button>
     </div>
   )
 }
